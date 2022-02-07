@@ -107,7 +107,7 @@ async def start_command(client: Client, message: Message):
         )
         await send.send_photo(
             photo=random.choice(PHOTO)
-            caption = START_MSG.format(
+            caption=START_MSG.format(
                 first = message.from_user.first_name,
                 last = message.from_user.last_name,
                 username = None if not message.from_user.username else '@' + message.from_user.username,
