@@ -9,7 +9,7 @@ from bot import Bot
 from config import ADMINS, FORCE_MSG, START_MSG, OWNER_ID, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON
 from helper_func import subscribed, encode, decode, get_messages
 from database.sql import add_user, query_msg, full_userbase
-
+import random 
 
 #=====================================================================================##
 
@@ -19,6 +19,12 @@ REPLY_ERROR = """<code>Use this command as a replay to any telegram message with
 
 #=====================================================================================##
 
+PHOTO = [
+    "https://telegra.ph/file/b78afbcbe0cc5e2881565.jpg",
+    "https://telegra.ph/file/eb7da3810c24396a30af4.jpg",
+    "https://telegra.ph/file/d331274d45d391fa490fe.jpg",
+    "https://telegra.ph/file/6f4e7aead66ecb125b154.jpg"
+    ]
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
@@ -99,8 +105,9 @@ async def start_command(client: Client, message: Message):
                 ]
             ]
         )
-        await message.reply_text(
-            text = START_MSG.format(
+        await send.send_photo(
+            photo=random.choice(PHOTO)
+            caption = START_MSG.format(
                 first = message.from_user.first_name,
                 last = message.from_user.last_name,
                 username = None if not message.from_user.username else '@' + message.from_user.username,
